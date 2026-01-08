@@ -5,7 +5,6 @@ from google.auth import jwt
 import asyncio
 import multiprocessing
 from multiprocessing.pool import Pool
-import numpy as np
 from typing import List
 from base58 import b58decode, b58encode
 from nacl.signing import SigningKey
@@ -128,11 +127,9 @@ def generate_address(prefix, suffix, jobId, is_case_sensitive):
                 for partial_result in partial_results:
                     if isinstance(partial_result, dict) and 'error' in partial_result:
                         logging.error(f"Error in worker process: {partial_result['error']}")
-                        continue 
-                    if isinstance(partial_result, np.ndarray) and partial_result.size > 0 and partial_result[0]:
-                        results.append(partial_result)
-                    elif isinstance(partial_result, list) and len(partial_result) > 0 and partial_result[0]:
-                        results.append(partial_result)
+                        continue
+                    if isinstance(partial_result, (bytes, bytearray, list, tuple)) and len(partial_result) > 0 and partial_result[0]:
+                        results.append(list(partial_result))
 
 
 
