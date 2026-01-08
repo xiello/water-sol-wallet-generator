@@ -19,6 +19,41 @@ class TestHostSetting(unittest.TestCase):
             HostSetting(kernel_source="kernel", iteration_bits=9).iteration_bytes, 2
         )
 
+    def test_increase_key32_resets_carry_byte_on_overflow(self) -> None:
+        setting = HostSetting(kernel_source="kernel", iteration_bits=7)
+        setting.key32 = bytearray(32)
+        setting.key32[-2] = 0x01
+        setting.key32[-1] = 0x90
+
+        setting.increase_key32()
+
+        self.assertEqual(setting.key32[-2], 0x02)
+        self.assertEqual(setting.key32[-1], 0x00)
+
+    def test_increase_key32_keeps_carry_byte_without_overflow(self) -> None:
+        setting = HostSetting(kernel_source="kernel", iteration_bits=7)
+        setting.key32 = bytearray(32)
+        setting.key32[-2] = 0x01
+        setting.key32[-1] = 0x40
+
+        setting.increase_key32()
+
+        self.assertEqual(setting.key32[-2], 0x01)
+        self.assertEqual(setting.key32[-1], 0xC0)
+
+    def test_increase_key32_resets_partial_byte_on_overflow(self) -> None:
+        setting = HostSetting(kernel_source="kernel", iteration_bits=9)
+        setting.key32 = bytearray(32)
+        setting.key32[-3] = 0x00
+        setting.key32[-2] = 0xFF
+        setting.key32[-1] = 0x55
+
+        setting.increase_key32()
+
+        self.assertEqual(setting.key32[-3], 0x01)
+        self.assertEqual(setting.key32[-2], 0x00)
+        self.assertEqual(setting.key32[-1], 0x55)
+
     def test_generate_key32_appends_zero_padding(self) -> None:
         with mock.patch("core.config.secrets.token_bytes", return_value=b"\xAB" * 31):
             setting = HostSetting(kernel_source="kernel", iteration_bits=8)
