@@ -6,7 +6,7 @@ You can install it directly on Windows (not WSL) and on Unix-like systems. For d
 $ python3 -m pip install -r requirements.txt
 ```
 
-Requires Python 3.6 or higher.
+Requires Python 3.6 or higher. This project no longer depends on numpy, so it is compatible with Python 3.13 without extra wheels.
 
 ## Docker
 
