@@ -12,7 +12,6 @@ RUN mkdir -p /etc/OpenCL/vendors && \
 RUN apt-get install -y python3-click \
     python3-base58 \
     python3-nacl \
-    python3-numpy \
     python3-pyopencl && \
     rm -rf /var/lib/apt/lists/*
 

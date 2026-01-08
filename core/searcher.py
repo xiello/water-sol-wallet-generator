@@ -2,7 +2,6 @@ import logging
 import time
 from typing import List, Optional, Tuple
 
-import numpy as np
 import pyopencl as cl
 
 from core.config import HostSetting
@@ -41,29 +40,29 @@ class Searcher:
         self.memobj_key32 = cl.Buffer(
             self.context,
             cl.mem_flags.READ_ONLY | cl.mem_flags.COPY_HOST_PTR,
-            32 * np.ubyte().itemsize,
+            len(self.setting.key32),
             hostbuf=self.setting.key32,
         )
         self.memobj_output = cl.Buffer(
-            self.context, cl.mem_flags.READ_WRITE, 33 * np.ubyte().itemsize
+            self.context, cl.mem_flags.READ_WRITE, 33
         )
         self.memobj_occupied_bytes = cl.Buffer(
             self.context,
             cl.mem_flags.READ_WRITE | cl.mem_flags.COPY_HOST_PTR,
-            hostbuf=np.array([self.setting.iteration_bytes]),
+            hostbuf=bytearray([self.setting.iteration_bytes]),
         )
         self.memobj_group_offset = cl.Buffer(
             self.context,
             cl.mem_flags.READ_WRITE | cl.mem_flags.COPY_HOST_PTR,
-            hostbuf=np.array([self.index]),
+            hostbuf=bytearray([self.index]),
         )
-        self.output = np.zeros(33, dtype=np.ubyte)
+        self.output = bytearray(33)
         self.kernel.set_arg(0, self.memobj_key32)
         self.kernel.set_arg(1, self.memobj_output)
         self.kernel.set_arg(2, self.memobj_occupied_bytes)
         self.kernel.set_arg(3, self.memobj_group_offset)
 
-    def find(self, log_stats: bool = True) -> np.ndarray:
+    def find(self, log_stats: bool = True) -> bytearray:
         start_time = time.time()
         cl.enqueue_copy(self.command_queue, self.memobj_key32, self.setting.key32)
         global_work_size = self.setting.global_work_size // self.gpu_chunks
@@ -111,13 +110,13 @@ def multi_gpu_init(
                 with lock:
                     if not stop_flag.value:
                         stop_flag.value = 1
-                return result.tolist()
+                return list(result)
             if time.time() - st > max(gpu_counts, 1):
                 i = 0
                 st = time.time()
                 with lock:
                     if stop_flag.value:
-                        return result.tolist()
+                        return list(result)
             else:
                 i += 1
     except Exception as e:
