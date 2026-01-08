@@ -11,6 +11,14 @@ class TestHostSetting(unittest.TestCase):
         with self.assertRaises(ValueError):
             HostSetting(kernel_source="kernel", iteration_bits=256)
 
+    def test_iteration_bytes_rounds_up(self) -> None:
+        self.assertEqual(
+            HostSetting(kernel_source="kernel", iteration_bits=1).iteration_bytes, 1
+        )
+        self.assertEqual(
+            HostSetting(kernel_source="kernel", iteration_bits=9).iteration_bytes, 2
+        )
+
     def test_generate_key32_appends_zero_padding(self) -> None:
         with mock.patch("core.config.secrets.token_bytes", return_value=b"\xAB" * 31):
             setting = HostSetting(kernel_source="kernel", iteration_bits=8)
