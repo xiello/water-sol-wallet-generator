@@ -1,3 +1,30 @@
+# Water Sol Wallet Generator
+
+Fast Solana vanity wallet generation with OpenCL.
+
+## Quick Terminal Setup
+
+```bash
+# 1) Clone the repo
+git clone https://github.com/<your-username>/water-sol-wallet-generator.git
+cd water-sol-wallet-generator
+
+# 2) (Optional but recommended) create a virtualenv
+python3 -m venv .venv
+source .venv/bin/activate
+
+# 3) Install dependencies
+python3 -m pip install -r requirements.txt
+
+# 4) Check available OpenCL devices
+python3 main.py show-device
+
+# 5) Generate vanity wallet(s)
+python3 main.py search-pubkey --starts-with WATER --count 1 --output-dir ./keys
+```
+
+The generated wallet JSON files are written to `./keys`.
+
 ## Installation
 
 You can install it directly on Windows (not WSL) and on Unix-like systems. For details on supported platforms, check [FAQs.md](./FAQs.md).

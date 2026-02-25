@@ -162,3 +162,7 @@ cython_debug/
 
 # private key
 *.json
+
+# macOS metadata
+.DS_Store
+keys/.DS_Store
