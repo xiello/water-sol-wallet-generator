@@ -1,81 +1,81 @@
 #!/usr/bin/env python3
 
-import os
-import sys
 import subprocess
+import sys
+
 from rich.console import Console
-from rich.panel import Panel
-from rich.prompt import Prompt, Confirm
-from rich.text import Text
+from rich.prompt import Confirm, Prompt
 
 console = Console()
 
-SAND = "#D4A574"
-SPICE_GOLD = "#FFD700"
-DESERT_ORANGE = "#FF8C00"
+BASE_COLOR = "#D4A574"
+ACCENT_COLOR = "#FFD700"
+WARN_COLOR = "#FF8C00"
 
 
 def print_banner():
     banner = f"""
-[{SPICE_GOLD}]╔═══════════════════════════════════════════════════════════════════╗
-║                    ⚡ WATER WALLET FORGE ⚡                       ║
+[{ACCENT_COLOR}]╔═══════════════════════════════════════════════════════════════════╗
+║                 SOLANA VANITY WALLET GENERATOR                    ║
 ║                                                                   ║
-║        [dim]"He who controls the keys, controls the universe"[/dim]        ║
+║            Interactive setup + real-time dashboard                ║
 ╚═══════════════════════════════════════════════════════════════════╝[/]
     """
     console.print(banner)
 
 
 def check_wifi():
-    console.print(f"\n[{DESERT_ORANGE}]⚠️  SECURITY CHECK[/]\n")
+    console.print(f"\n[{WARN_COLOR}]Security Check[/]\n")
 
-    wifi_off = Confirm.ask(f"[{SAND}]Have you turned OFF your WiFi?[/]", default=False)
+    wifi_off = Confirm.ask(
+        f"[{BASE_COLOR}]Have you turned OFF your WiFi?[/]", default=False
+    )
 
     if not wifi_off:
         console.print(
-            f"\n[{DESERT_ORANGE}]⚠️  Please turn off WiFi first for security![/]"
+            f"\n[{WARN_COLOR}]Please turn off WiFi first for security.[/]"
         )
-        console.print(f"[dim {SAND}]Then run this script again.[/]\n")
+        console.print(f"[dim {BASE_COLOR}]Then run this script again.[/]\n")
         sys.exit(0)
 
-    console.print(f"[{SPICE_GOLD}]✓ Security check passed[/]\n")
+    console.print(f"[{ACCENT_COLOR}]Security check passed[/]\n")
 
 
 def get_search_params():
-    console.print(f"[{SPICE_GOLD}]═══ SEARCH PARAMETERS ═══[/]\n")
+    console.print(f"[{ACCENT_COLOR}]=== SEARCH PARAMETERS ===[/]\n")
 
-    console.print(f"[{SAND}]Enter prefix (what your address should start with)[/]")
+    console.print(f"[{BASE_COLOR}]Enter prefix (what your address should start with)[/]")
     console.print(
-        f"[dim]Examples: WATER, Sol, DUNE — separate multiple with commas: Water, Dune, Sol[/]"
+        "[dim]Examples: SOL, ABC, DEV - separate multiple with commas: SOL, DEV[/]"
     )
-    prefix_raw = Prompt.ask(f"[{DESERT_ORANGE}]Prefix[/]", default="")
+    prefix_raw = Prompt.ask(f"[{WARN_COLOR}]Prefix[/]", default="")
     prefixes = [p.strip() for p in prefix_raw.split(",") if p.strip()] if prefix_raw else []
 
-    console.print(f"\n[{SAND}]Enter suffix (what your address should end with)[/]")
-    console.print(f"[dim]Examples: RICH, 420, or just press Enter to skip[/]")
-    suffix = Prompt.ask(f"[{DESERT_ORANGE}]Suffix[/]", default="")
+    console.print(f"\n[{BASE_COLOR}]Enter suffix (what your address should end with)[/]")
+    console.print(f"[dim]Examples: XYZ, 420, or press Enter to skip[/]")
+    suffix = Prompt.ask(f"[{WARN_COLOR}]Suffix[/]", default="")
 
     if not prefixes and not suffix:
         console.print(
-            f"\n[{DESERT_ORANGE}]⚠️  You must provide at least a prefix OR suffix![/]\n"
+            f"\n[{WARN_COLOR}]You must provide at least a prefix OR suffix.[/]\n"
         )
         return get_search_params()
 
-    console.print(f"\n[{SAND}]How many wallets do you want to find?[/]")
-    count = Prompt.ask(f"[{DESERT_ORANGE}]Count[/]", default="1")
+    console.print(f"\n[{BASE_COLOR}]How many wallets do you want to find?[/]")
+    count = Prompt.ask(f"[{WARN_COLOR}]Count[/]", default="1")
 
     try:
         count = int(count)
         if count < 1:
             raise ValueError
-    except:
-        console.print(f"[{DESERT_ORANGE}]Invalid number, using 1[/]")
+    except ValueError:
+        console.print(f"[{WARN_COLOR}]Invalid number, using 1[/]")
         count = 1
 
-    console.print(f"\n[{SAND}]Case-sensitive search?[/]")
-    console.print(f"[dim]No = Much faster (water = WATER = WaTeR)[/]")
-    console.print(f"[dim]Yes = Exact match only[/]")
-    case_sensitive = Confirm.ask(f"[{DESERT_ORANGE}]Case-sensitive[/]", default=False)
+    console.print(f"\n[{BASE_COLOR}]Case-sensitive search?[/]")
+    console.print(f"[dim]No = faster (abc = ABC = aBc)[/]")
+    console.print(f"[dim]Yes = exact match only[/]")
+    case_sensitive = Confirm.ask(f"[{WARN_COLOR}]Case-sensitive[/]", default=False)
 
     return {
         "prefixes": prefixes,
@@ -86,17 +86,17 @@ def get_search_params():
 
 
 def show_summary(params):
-    console.print(f"\n[{SPICE_GOLD}]═══ MISSION SUMMARY ═══[/]\n")
+    console.print(f"\n[{ACCENT_COLOR}]=== SEARCH SUMMARY ===[/]\n")
 
     if params["prefixes"]:
         prefix_display = ", ".join(params["prefixes"])
-        console.print(f"[{SAND}]Prefix(es):[/] [{SPICE_GOLD}]{prefix_display}[/]")
+        console.print(f"[{BASE_COLOR}]Prefix(es):[/] [{ACCENT_COLOR}]{prefix_display}[/]")
     if params["suffix"]:
-        console.print(f"[{SAND}]Suffix:[/] [{SPICE_GOLD}]{params['suffix']}[/]")
+        console.print(f"[{BASE_COLOR}]Suffix:[/] [{ACCENT_COLOR}]{params['suffix']}[/]")
 
-    console.print(f"[{SAND}]Wallets to find:[/] [{SPICE_GOLD}]{params['count']}[/]")
+    console.print(f"[{BASE_COLOR}]Wallets to find:[/] [{ACCENT_COLOR}]{params['count']}[/]")
     console.print(
-        f"[{SAND}]Case-sensitive:[/] [{SPICE_GOLD}]{'Yes' if params['case_sensitive'] else 'No'}[/]"
+        f"[{BASE_COLOR}]Case-sensitive:[/] [{ACCENT_COLOR}]{'Yes' if params['case_sensitive'] else 'No'}[/]"
     )
 
     shortest_prefix = min((len(p) for p in params["prefixes"]), default=0)
@@ -104,29 +104,29 @@ def show_summary(params):
 
     if difficulty <= 3:
         estimate = "~seconds to minutes"
-        emoji = "🟢"
+        indicator = "easy"
     elif difficulty == 4:
         estimate = "~minutes"
-        emoji = "🟡"
+        indicator = "medium"
     elif difficulty == 5:
         estimate = "~hours"
-        emoji = "🟠"
+        indicator = "hard"
     else:
         if params["case_sensitive"]:
             estimate = "~days to weeks"
-            emoji = "🔴"
+            indicator = "very hard"
         else:
             estimate = "~hours to days"
-            emoji = "🟠"
+            indicator = "hard"
 
     console.print(
-        f"\n[{SAND}]Difficulty:[/] [{DESERT_ORANGE}]{difficulty} characters {emoji}[/]"
+        f"\n[{BASE_COLOR}]Difficulty:[/] [{WARN_COLOR}]{difficulty} characters ({indicator})[/]"
     )
-    console.print(f"[{SAND}]Estimated time:[/] [{DESERT_ORANGE}]{estimate}[/]")
+    console.print(f"[{BASE_COLOR}]Estimated time:[/] [{WARN_COLOR}]{estimate}[/]")
 
 
 def launch_dashboard(params):
-    console.print(f"\n[{SPICE_GOLD}]🚀 Launching dashboard...[/]\n")
+    console.print(f"\n[{ACCENT_COLOR}]Launching dashboard...[/]\n")
 
     cmd = [
         "python3",
@@ -145,9 +145,9 @@ def launch_dashboard(params):
     try:
         subprocess.run(cmd, check=True)
     except KeyboardInterrupt:
-        console.print(f"\n[{SAND}]Operation cancelled.[/]\n")
-    except Exception as e:
-        console.print(f"\n[{DESERT_ORANGE}]Error: {e}[/]\n")
+        console.print(f"\n[{BASE_COLOR}]Operation cancelled.[/]\n")
+    except Exception as exc:
+        console.print(f"\n[{WARN_COLOR}]Error: {exc}[/]\n")
 
 
 def main():
@@ -160,12 +160,14 @@ def main():
 
     show_summary(params)
 
-    console.print(f"\n[{SPICE_GOLD}]═══════════════════════════════════════[/]\n")
+    console.print(f"\n[{ACCENT_COLOR}]=====================================[/]\n")
 
-    ready = Confirm.ask(f"[{SAND}]Ready to start the spice harvest?[/]", default=True)
+    ready = Confirm.ask(
+        f"[{BASE_COLOR}]Ready to start searching?[/]", default=True
+    )
 
     if not ready:
-        console.print(f"\n[{SAND}]Mission aborted. The desert awaits.[/]\n")
+        console.print(f"\n[{BASE_COLOR}]Operation aborted.[/]\n")
         sys.exit(0)
 
     launch_dashboard(params)

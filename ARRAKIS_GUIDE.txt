@@ -1,83 +1,67 @@
 ╔═══════════════════════════════════════════════════════════════════╗
-║                🏜️  WATER WALLET FORGE - USAGE GUIDE              ║
+║                  SOLANA VANITY WALLET - USAGE GUIDE              ║
 ╚═══════════════════════════════════════════════════════════════════╝
 
-⚡ QUICK START (Turn off WiFi first!)
+QUICK START
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  ~/Documents/water-sol-wallet-generator/forge.sh --starts-with "WATER"
+  ./forge.sh --starts-with "SOL"
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-📋 EXAMPLES
+EXAMPLES
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   # Find address starting with "Sol"
   ./forge.sh --starts-with "Sol"
 
-  # Find address ending with "DUNE"
-  ./forge.sh --ends-with "DUNE"
+  # Find address ending with "XYZ"
+  ./forge.sh --ends-with "XYZ"
 
-  # Find address with both prefix AND suffix
+  # Find address with both prefix and suffix
   ./forge.sh --starts-with "So" --ends-with "L"
 
   # Find multiple wallets
-  ./forge.sh --starts-with "WATER" --count 3
+  ./forge.sh --starts-with "SOL" --count 3
 
-  # Case insensitive (much faster!)
-  ./forge.sh --starts-with "water" --is-case-sensitive False
+  # Case insensitive (faster)
+  ./forge.sh --starts-with "sol" --is-case-sensitive False
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🎯 WHAT YOU'LL SEE
+DASHBOARD
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   ┌─────────────────────────────────────┐
-  │  Beautiful Dune-themed dashboard    │
-  │  Real-time GPU stats & speed        │
+  │  Real-time GPU stats and speed      │
   │  Live wallet counter                │
-  │  Time elapsed & ETA                 │
-  │  Instant notification when found    │
+  │  Time elapsed and ETA               │
+  │  Match notifications                │
   └─────────────────────────────────────┘
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-📁 OUTPUT
+OUTPUT
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  Found wallets saved to: ~/Documents/water-sol-wallet-generator/keys/
-  
+  Found wallets saved to: ./keys/
+
   Each wallet:
     - JSON file: {PublicAddress}.json
-    - Contains full keypair (64 bytes)
+    - Full keypair (64 bytes)
     - Private key shown on completion
 
   Auto-exports when done:
-    ✓ Public address (for receiving)
-    ✓ Private key base58 (for wallet import)
+    - Public address
+    - Private key (base58)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-⏱️  TIME ESTIMATES (M4 Pro)
+SECURITY CHECKLIST
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  3 chars:  ~10 seconds
-  4 chars:  ~5 minutes  
-  5 chars:  ~5 hours
-  6 chars:  ~12 days (case-sensitive)
-           ~3 hours (case-insensitive)
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-🔐 SECURITY CHECKLIST
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  [ ] Turn off WiFi BEFORE running
-  [ ] Run on trusted machine only  
+  [ ] Turn off WiFi before running
+  [ ] Run on trusted machine only
   [ ] Never run on cloud/VPS
   [ ] Delete keys from disk after importing to wallet
   [ ] Test with small amount first
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-The spice must flow. 🏜️

@@ -28,8 +28,8 @@ from core.utils.helpers import check_character, load_kernel_source
 SAND = "#D4A574"
 LIGHT_SAND = "#F4E7D7"
 BROWN = "#8B7355"
-SPICE_GOLD = "#FFD700"
-DESERT_ORANGE = "#FF8C00"
+ACCENT_GOLD = "#FFD700"
+PRIMARY_ORANGE = "#FF8C00"
 
 console = Console()
 
@@ -97,7 +97,7 @@ def gpu_worker(
 def result_monitor_thread(
     result_queue,
     output_dir: str,
-    stats: "DuneStats",
+    stats: "SearchStats",
     stop_flag,
     target_count: int,
 ):
@@ -120,7 +120,7 @@ def result_monitor_thread(
 
 
 def keyboard_thread(
-    stats: "DuneStats", stop_event: threading.Event, export_flag: threading.Event
+    stats: "SearchStats", stop_event: threading.Event, export_flag: threading.Event
 ):
     if not sys.stdin.isatty():
         return
@@ -149,7 +149,7 @@ def keyboard_thread(
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 
 
-class DuneStats:
+class SearchStats:
     def __init__(self, gpu_count: int, target_count: int):
         self.gpu_count = gpu_count
         self.target_count = target_count
@@ -190,30 +190,30 @@ class DuneStats:
 
 
 def create_header() -> Panel:
-    header_art = f"""[{SPICE_GOLD}]\
+    header_art = f"""[{ACCENT_GOLD}]\
 \u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557
-\u2551                    \u26a1 WATER WALLET FORGE \u26a1                       \u2551
+\u2551               \u26a1 SOLANA VANITY ADDRESS SEARCH \u26a1                 \u2551
 \u2551                                                                   \u2551
-\u2551        [dim]"He who controls the keys, controls the universe"[/dim]        \u2551
+\u2551               [dim]GPU-accelerated keypair generation[/dim]                \u2551
 \u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d[/]"""
     return Panel(
         Align.center(Text.from_markup(header_art)),
         style=f"bold {SAND}",
-        border_style=DESERT_ORANGE,
+        border_style=PRIMARY_ORANGE,
     )
 
 
-def create_gpu_panel(stats: DuneStats, gpu_names: list[str]) -> Panel:
+def create_gpu_panel(stats: SearchStats, gpu_names: list[str]) -> Panel:
     table = Table(
         show_header=True,
-        header_style=f"bold {SPICE_GOLD}",
+        header_style=f"bold {ACCENT_GOLD}",
         border_style=BROWN,
         expand=True,
     )
     table.add_column("GPU", style=SAND, width=6)
     table.add_column("Device", style=LIGHT_SAND, ratio=2)
-    table.add_column("Speed", style=DESERT_ORANGE, justify="right", width=14)
-    table.add_column("Status", style=SPICE_GOLD, width=16)
+    table.add_column("Speed", style=PRIMARY_ORANGE, justify="right", width=14)
+    table.add_column("Status", style=ACCENT_GOLD, width=16)
 
     spinner_frames = [
         "\u280b",
@@ -247,12 +247,12 @@ def create_gpu_panel(stats: DuneStats, gpu_names: list[str]) -> Panel:
 
     return Panel(
         table,
-        title=f"[{SPICE_GOLD}]\U0001f3dc\ufe0f  SANDWORM PROCESSORS[/]",
-        border_style=DESERT_ORANGE,
+        title=f"[{ACCENT_GOLD}]GPU PROCESSORS[/]",
+        border_style=PRIMARY_ORANGE,
     )
 
 
-def create_stats_panel(stats: DuneStats, search_params: dict) -> Panel:
+def create_stats_panel(stats: SearchStats, search_params: dict) -> Panel:
     total_speed = stats.get_total_speed()
     elapsed = stats.get_elapsed_time()
 
@@ -269,9 +269,9 @@ def create_stats_panel(stats: DuneStats, search_params: dict) -> Panel:
 
     lines = [
         "",
-        f"  [{LIGHT_SAND}]Wallets Generated:[/]  [{DESERT_ORANGE}]{format_number(stats.wallets_generated)}[/]",
-        f"  [{LIGHT_SAND}]Wallets Found:[/]      [{SPICE_GOLD}]{stats.wallets_found}/{stats.target_count}[/]",
-        f"  [{LIGHT_SAND}]Total Speed:[/]        [{DESERT_ORANGE}]{total_speed:.2f} MH/s[/]",
+        f"  [{LIGHT_SAND}]Wallets Generated:[/]  [{PRIMARY_ORANGE}]{format_number(stats.wallets_generated)}[/]",
+        f"  [{LIGHT_SAND}]Wallets Found:[/]      [{ACCENT_GOLD}]{stats.wallets_found}/{stats.target_count}[/]",
+        f"  [{LIGHT_SAND}]Total Speed:[/]        [{PRIMARY_ORANGE}]{total_speed:.2f} MH/s[/]",
         f"  [{LIGHT_SAND}]Time Elapsed:[/]       [{SAND}]{elapsed}[/]",
         f"  [{LIGHT_SAND}]Est. Completion:[/]    [{SAND}]{eta}[/]",
         "",
@@ -280,42 +280,42 @@ def create_stats_panel(stats: DuneStats, search_params: dict) -> Panel:
     if search_params.get("starts_with"):
         prefix_label = "Prefix(es)" if "," in search_params["starts_with"] else "Prefix"
         lines.append(
-            f"  [{LIGHT_SAND}]\U0001f3af {prefix_label}:[/] [{SPICE_GOLD}]{search_params['starts_with']}[/]"
+            f"  [{LIGHT_SAND}]\U0001f3af {prefix_label}:[/] [{ACCENT_GOLD}]{search_params['starts_with']}[/]"
         )
     if search_params.get("ends_with"):
         lines.append(
-            f"  [{LIGHT_SAND}]\U0001f3af Suffix:[/] [{SPICE_GOLD}]{search_params['ends_with']}[/]"
+            f"  [{LIGHT_SAND}]\U0001f3af Suffix:[/] [{ACCENT_GOLD}]{search_params['ends_with']}[/]"
         )
 
     stats_text = "\n".join(lines)
 
     return Panel(
         Text.from_markup(stats_text),
-        title=f"[{SPICE_GOLD}]\U0001f4ca HARVEST STATISTICS[/]",
+        title=f"[{ACCENT_GOLD}]SEARCH STATISTICS[/]",
         border_style=BROWN,
     )
 
 
-def create_found_panel(stats: DuneStats) -> Panel:
+def create_found_panel(stats: SearchStats) -> Panel:
     if stats.wallets_found == 0:
-        content = f"[dim {SAND}]The desert is patient...[/]"
+        content = f"[dim {SAND}]Searching for matching addresses...[/]"
     else:
-        content = f"[{SPICE_GOLD}]\U0001f3dc\ufe0f  {stats.wallets_found} WALLET(S) DISCOVERED![/]\n\n"
+        content = f"[{ACCENT_GOLD}]{stats.wallets_found} WALLET(S) DISCOVERED[/]\n\n"
         for addr in stats.found_addresses[-5:]:
-            content += f"[{DESERT_ORANGE}]\u25b8[/] [{LIGHT_SAND}]{addr}[/]\n"
+            content += f"[{PRIMARY_ORANGE}]\u25b8[/] [{LIGHT_SAND}]{addr}[/]\n"
 
     return Panel(
         Align.center(Text.from_markup(content)),
-        title=f"[{SPICE_GOLD}]\U0001f48e SPICE HARVEST[/]",
-        border_style=SPICE_GOLD,
+        title=f"[{ACCENT_GOLD}]MATCHED WALLETS[/]",
+        border_style=ACCENT_GOLD,
     )
 
 
 def create_controls_panel(paused: bool) -> Panel:
     if paused:
-        controls = f"[{SPICE_GOLD}]\u23f8  PAUSED[/] \u2502 [{SAND}][C]ontinue  [E]xport & Exit  [X]Abort[/]"
+        controls = f"[{ACCENT_GOLD}]\u23f8  PAUSED[/] \u2502 [{SAND}][C]ontinue  [E]xport & Exit  [X]Abort[/]"
     else:
-        controls = f"[{DESERT_ORANGE}]\u26a1 MINING[/] \u2502 [{SAND}][S]top  [E]xport & Exit  [X]Abort[/]"
+        controls = f"[{PRIMARY_ORANGE}]\u26a1 SEARCHING[/] \u2502 [{SAND}][S]top  [E]xport & Exit  [X]Abort[/]"
 
     return Panel(
         Align.center(Text.from_markup(controls)),
@@ -325,7 +325,7 @@ def create_controls_panel(paused: bool) -> Panel:
 
 
 def create_layout(
-    stats: DuneStats, search_params: dict, gpu_names: list[str]
+    stats: SearchStats, search_params: dict, gpu_names: list[str]
 ) -> Layout:
     layout = Layout()
     layout.split_column(
@@ -366,11 +366,11 @@ def export_wallets(output_dir: str):
         return
 
     console.print(
-        f"\n[{SPICE_GOLD}]\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550[/]"
+        f"\n[{ACCENT_GOLD}]\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550[/]"
     )
-    console.print(f"[{SPICE_GOLD}]        SPICE HARVEST COMPLETE         [/]")
+    console.print(f"[{ACCENT_GOLD}]             SEARCH COMPLETE             [/]")
     console.print(
-        f"[{SPICE_GOLD}]\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550[/]\n"
+        f"[{ACCENT_GOLD}]\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550[/]\n"
     )
 
     for wallet_file in wallet_files:
@@ -378,12 +378,12 @@ def export_wallets(output_dir: str):
         keypair = json.load(open(wallet_file))
         private_key_b58 = base58.b58encode(bytes(keypair[:64])).decode()
 
-        console.print(f"[{DESERT_ORANGE}]Public Address:[/] [{LIGHT_SAND}]{pubkey}[/]")
+        console.print(f"[{PRIMARY_ORANGE}]Public Address:[/] [{LIGHT_SAND}]{pubkey}[/]")
         console.print(f"[{SAND}]Private Key:[/] [{BROWN}]{private_key_b58}[/]")
         console.print(f"[dim {SAND}]JSON File: {wallet_file}[/]\n")
 
     console.print(
-        f"[{SPICE_GOLD}]\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550[/]\n"
+        f"[{ACCENT_GOLD}]\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550[/]\n"
     )
 
 
@@ -409,7 +409,7 @@ def export_wallets(output_dir: str):
 def main(starts_with, ends_with, count, output_dir, iteration_bits, is_case_sensitive):
     if not starts_with and not ends_with:
         console.print(
-            f"[{DESERT_ORANGE}]Error:[/] Provide at least --starts-with or --ends-with"
+            f"[{PRIMARY_ORANGE}]Error:[/] Provide at least --starts-with or --ends-with"
         )
         sys.exit(1)
 
@@ -423,7 +423,7 @@ def main(starts_with, ends_with, count, output_dir, iteration_bits, is_case_sens
     gpu_names = get_gpu_names()
     gpu_counts = len(gpu_names) if gpu_names else len(get_all_gpu_devices())
     if gpu_counts == 0:
-        console.print(f"[{DESERT_ORANGE}]Error:[/] No GPU devices found.")
+        console.print(f"[{PRIMARY_ORANGE}]Error:[/] No GPU devices found.")
         sys.exit(1)
 
     kernel_source = load_kernel_source(starts_with, ends_with, is_case_sensitive)
@@ -432,7 +432,7 @@ def main(starts_with, ends_with, count, output_dir, iteration_bits, is_case_sens
     result_queue = multiprocessing.Queue()
     stop_flag = multiprocessing.Value(c_int, 0)
 
-    stats = DuneStats(gpu_count=gpu_counts, target_count=count)
+    stats = SearchStats(gpu_count=gpu_counts, target_count=count)
     starts_with_display = ", ".join(starts_with) if starts_with else ""
     shortest_prefix_len = min((len(p) for p in starts_with), default=0)
     search_params = {

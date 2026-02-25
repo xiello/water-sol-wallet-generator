@@ -1,46 +1,42 @@
 ╔═══════════════════════════════════════════════════════════════════╗
-║                🏜️  WATER WALLET FORGE - QUICK START              ║
+║                SOLANA VANITY WALLET - QUICK START                ║
 ╚═══════════════════════════════════════════════════════════════════╝
 
 
-🚀 SUPER SIMPLE MODE
+QUICK MODE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  cd ~/Documents/water-sol-wallet-generator
+  cd /path/to/wallet-generator
   npm start
 
-That's it! It will ask you step by step:
+The wizard walks you through:
 
-  1. ✓ Did you turn off WiFi?
-  2. 🎯 What prefix do you want? (e.g., WATER)
-  3. 🎯 What suffix do you want? (or skip)
-  4. 📊 How many wallets?
-  5. 🔤 Case-sensitive?
-  6. ▶️  Start mining!
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-
-⚡ ADVANCED MODE (skip wizard)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  ./forge.sh --starts-with "WATER"
-  ./forge.sh --ends-with "DUNE"
-  ./forge.sh --starts-with "Sol" --ends-with "L"
+  1. Security check
+  2. Prefix input (optional, can set multiple)
+  3. Suffix input (optional)
+  4. Wallet count
+  5. Case sensitivity
+  6. Start search
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-📁 WHERE ARE MY KEYS?
+ADVANCED MODE (skip wizard)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  ~/Documents/water-sol-wallet-generator/keys/
+  ./forge.sh --starts-with "SOL"
+  ./forge.sh --ends-with "XYZ"
+  ./forge.sh --starts-with "So" --ends-with "L"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+OUTPUT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ./keys/
 
   Each wallet shows at the end:
-    - Public Address (share this to receive SOL)
-    - Private Key (NEVER share, import to Phantom/wallet)
-    - JSON file (backup, compatible with solana-keygen)
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-The spice must flow. 🏜️
+    - Public address
+    - Private key (do not share)
+    - JSON backup file (compatible with solana-keygen)
