@@ -1,4 +1,4 @@
-# Solana Vanity Wallet Generator
+# Water Sol Wallet Generator
 
 Fast Solana vanity wallet generation with OpenCL.
 
@@ -6,8 +6,8 @@ Fast Solana vanity wallet generation with OpenCL.
 
 ```bash
 # 1) Clone the repo
-git clone <repo-url>
-cd <repo-directory>
+git clone https://github.com/xiello/water-sol-wallet-generator.git
+cd water-sol-wallet-generator
 
 # 2) Create a virtual environment
 python3 -m venv .venv
@@ -59,7 +59,7 @@ Please note:
 
 ```bash
 python3 main.py show-device
-python3 main.py search-pubkey --starts-with SOL --count 1 --output-dir ./keys
+python3 main.py search-pubkey --starts-with WATER --count 1 --output-dir ./keys
 python3 main.py search-pubkey --starts-with So --ends-with L --is-case-sensitive False
 ```
 

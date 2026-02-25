@@ -1,8 +1,8 @@
 # Terminal Setup (Quick)
 
 ```bash
-git clone <repo-url>
-cd <repo-directory>
+git clone https://github.com/xiello/water-sol-wallet-generator.git
+cd water-sol-wallet-generator
 python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install -r requirements.txt

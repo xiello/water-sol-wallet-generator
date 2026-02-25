@@ -1,42 +1,46 @@
 ╔═══════════════════════════════════════════════════════════════════╗
-║                SOLANA VANITY WALLET - QUICK START                ║
+║                🏜️  WATER WALLET FORGE - QUICK START              ║
 ╚═══════════════════════════════════════════════════════════════════╝
 
 
-QUICK MODE
+🚀 SUPER SIMPLE MODE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  cd /path/to/wallet-generator
+  cd ~/Documents/water-sol-wallet-generator
   npm start
 
-The wizard walks you through:
+That's it! It will ask you step by step:
 
-  1. Security check
-  2. Prefix input (optional, can set multiple)
-  3. Suffix input (optional)
-  4. Wallet count
-  5. Case sensitivity
-  6. Start search
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-
-ADVANCED MODE (skip wizard)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  ./forge.sh --starts-with "SOL"
-  ./forge.sh --ends-with "XYZ"
-  ./forge.sh --starts-with "So" --ends-with "L"
+  1. ✓ Did you turn off WiFi?
+  2. 🎯 What prefix do you want? (e.g., WATER)
+  3. 🎯 What suffix do you want? (or skip)
+  4. 📊 How many wallets?
+  5. 🔤 Case-sensitive?
+  6. ▶️  Start mining!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-OUTPUT
+⚡ ADVANCED MODE (skip wizard)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  ./keys/
+  ./forge.sh --starts-with "WATER"
+  ./forge.sh --ends-with "DUNE"
+  ./forge.sh --starts-with "Sol" --ends-with "L"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+📁 WHERE ARE MY KEYS?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ~/Documents/water-sol-wallet-generator/keys/
 
   Each wallet shows at the end:
-    - Public address
-    - Private key (do not share)
-    - JSON backup file (compatible with solana-keygen)
+    - Public Address (share this to receive SOL)
+    - Private Key (NEVER share, import to Phantom/wallet)
+    - JSON file (backup, compatible with solana-keygen)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+The spice must flow. 🏜️
