@@ -1,5 +1,5 @@
 #!/bin/bash
-cd ~/Documents/SolVanityCL
+cd "$(dirname "$0")"
 source .venv/bin/activate
 
 if [ $# -eq 0 ]; then

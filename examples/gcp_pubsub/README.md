@@ -1,5 +1,5 @@
 ## INTRODUCTION
-This example demonstrates an implementation of SolVanityCL with google pub/sub. To run this project you will need to create a gcp project and enable google pub/sub on that. Google Pub/Sub has a very generous free tier plan which you can check [here](https://cloud.google.com/pubsub/pricing).
+This example demonstrates an implementation of the vanity wallet generator with google pub/sub. To run this project you will need to create a gcp project and enable google pub/sub on that. Google Pub/Sub has a very generous free tier plan which you can check [here](https://cloud.google.com/pubsub/pricing).
 
 ## SETTING UP GCP PUB/SUB TOPICS AND SUBSCRIPTIONS
 1. Create topics - There are three topics that we need to create, listed below:
@@ -38,4 +38,3 @@ python3 main.py
 ```
 python3 publisher.py
 ```
-

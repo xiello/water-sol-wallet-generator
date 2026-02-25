@@ -6,7 +6,7 @@
 🚀 SUPER SIMPLE MODE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  cd ~/Documents/SolVanityCL
+  cd ~/Documents/water-sol-wallet-generator
   npm start
 
 That's it! It will ask you step by step:
@@ -34,7 +34,7 @@ That's it! It will ask you step by step:
 📁 WHERE ARE MY KEYS?
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  ~/Documents/SolVanityCL/keys/
+  ~/Documents/water-sol-wallet-generator/keys/
 
   Each wallet shows at the end:
     - Public Address (share this to receive SOL)

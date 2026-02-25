@@ -40,13 +40,13 @@ Requires Python 3.6 or higher. This project no longer depends on numpy, so it is
 Only works on Linux platforms with Nvidia GPUs. [Check this doc](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installation).
 
 ```bash
-$ docker build -t sol_vanity_cl .
-$ docker run --rm -it --gpus all sol_vanity_cl
+$ docker build -t solana-vanity-wallet-generator .
+$ docker run --rm -it --gpus all solana-vanity-wallet-generator
 ```
 
 You will enter the container. The source code is located in the /app directory in the container, and all dependencies have been installed.
 
-Use the GHCR image `ghcr.io/wincerchan/solvanitycl:latest`. You can still use the template I created on [vast.ai](https://cloud.vast.ai/?ref_id=109219&creator_id=109219&name=SolVanityCL) or [runpod.io](https://runpod.io/console/deploy?template=fgllgqsl24&ref=uh5x1hv5) to run this program, but update the image source accordingly. Please note:
+Please note:
 
 1. The device’s CUDA version should be greater than 12.0.
 2. The source code is located in the /app directory, so you don’t need to download the code from GitHub.

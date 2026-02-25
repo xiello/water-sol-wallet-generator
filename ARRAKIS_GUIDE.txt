@@ -5,7 +5,7 @@
 ⚡ QUICK START (Turn off WiFi first!)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  ~/Documents/SolVanityCL/forge.sh --starts-with "WATER"
+  ~/Documents/water-sol-wallet-generator/forge.sh --starts-with "WATER"
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -45,7 +45,7 @@
 📁 OUTPUT
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  Found wallets saved to: ~/Documents/SolVanityCL/keys/
+  Found wallets saved to: ~/Documents/water-sol-wallet-generator/keys/
   
   Each wallet:
     - JSON file: {PublicAddress}.json
