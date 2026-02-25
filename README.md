@@ -6,7 +6,7 @@ Fast Solana vanity wallet generation with OpenCL.
 
 ```bash
 # 1) Clone the repo
-git clone https://github.com/<your-username>/water-sol-wallet-generator.git
+git clone https://github.com/xiello/water-sol-wallet-generator.git
 cd water-sol-wallet-generator
 
 # 2) (Optional but recommended) create a virtualenv

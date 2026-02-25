@@ -1,7 +1,7 @@
 # Terminal Setup (Quick)
 
 ```bash
-git clone https://github.com/<your-username>/water-sol-wallet-generator.git
+git clone https://github.com/xiello/water-sol-wallet-generator.git
 cd water-sol-wallet-generator
 python3 -m venv .venv
 source .venv/bin/activate
