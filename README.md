@@ -2,28 +2,32 @@
 
 Fast Solana vanity wallet generation with OpenCL.
 
-## Quick Terminal Setup
+## Quick Start (Wizard)
 
 ```bash
 # 1) Clone the repo
 git clone https://github.com/xiello/water-sol-wallet-generator.git
 cd water-sol-wallet-generator
 
-# 2) (Optional but recommended) create a virtualenv
+# 2) Create a virtual environment
 python3 -m venv .venv
 source .venv/bin/activate
 
 # 3) Install dependencies
 python3 -m pip install -r requirements.txt
 
-# 4) Check available OpenCL devices
-python3 main.py show-device
-
-# 5) Generate vanity wallet(s)
-python3 main.py search-pubkey --starts-with WATER --count 1 --output-dir ./keys
+# 4) Start the interactive wizard
+npm start
 ```
 
-The generated wallet JSON files are written to `./keys`.
+`npm start` launches the guided wizard (`start.py`) that walks you through:
+1. Security check (WiFi off)
+2. Prefix/suffix selection
+3. Wallet count
+4. Case sensitivity
+5. Launching the live dashboard miner
+
+Generated wallet JSON files are written to `./keys`.
 
 ## Installation
 
@@ -51,54 +55,13 @@ Please note:
 1. The device’s CUDA version should be greater than 12.0.
 2. The source code is located in the /app directory, so you don’t need to download the code from GitHub.
 
-## Usage
+## Advanced CLI (Optional)
 
 ```bash
-$ python3 main.py
-
-Usage: main.py [OPTIONS] COMMAND [ARGS]...
-
-Options:
-  --help  Show this message and exit.
-
-Commands:
-  search-pubkey  Search Solana vanity pubkey
-  show-device    Show OpenCL devices
+python3 main.py show-device
+python3 main.py search-pubkey --starts-with WATER --count 1 --output-dir ./keys
+python3 main.py search-pubkey --starts-with So --ends-with L --is-case-sensitive False
 ```
-
-### Search Pubkey
-
-```bash
-$ python3 main.py search-pubkey --help
-
-Usage: main.py search-pubkey [OPTIONS]
-
-  Search Solana vanity pubkey
-
-Options:
-  --starts-with TEXT              Public key starts with the indicated prefix. Provide multiple arguments to search for multiple prefixes.
-  --ends-with TEXT                Public key ends with the indicated suffix.
-  --count INTEGER                 Count of pubkeys to generate.  [default: 1]
-  --output-dir DIRECTORY          Output directory.  [default: ./]
-  --select-device / --no-select-device
-                                  Select OpenCL device manually  [default: no-
-                                  select-device]
-  --iteration-bits INTEGER        Number of the iteration occupied bits.
-                                  Recommended 24, 26, 28, 30, 32. The larger
-                                  the bits, the longer it takes to complete an
-                                  iteration.  [default: 24]
-  --is-case-sensitive BOOLEAN     Whether the search should be case sensitive
-                                  or not. [default: True]
-  --help                          Show this message and exit.
-```
-
-Example:
-
-```bash
-$ python3 main.py search-pubkey --starts-with SoL # run
-$ solana-keygen pubkey SoLxxxxxxxxxxx.json # you should install solana cli to verify it
-```
-
 
 ## FAQs
 

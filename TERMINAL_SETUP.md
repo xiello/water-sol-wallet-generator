@@ -6,10 +6,10 @@ cd water-sol-wallet-generator
 python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install -r requirements.txt
-python3 main.py show-device
-python3 main.py search-pubkey --starts-with WATER --count 1 --output-dir ./keys
+npm start
 ```
 
 Notes:
+- `npm start` opens the interactive wizard and then launches the dashboard miner.
 - Wallet files are saved in `./keys`.
 - Keep private key JSON files offline and never share them.
