@@ -3,13 +3,11 @@
 ```bash
 git clone https://github.com/xiello/water-sol-wallet-generator.git
 cd water-sol-wallet-generator
-python3 -m venv .venv
-source .venv/bin/activate
-python3 -m pip install -r requirements.txt
 npm start
 ```
 
 Notes:
-- `npm start` opens the interactive wizard and then launches the dashboard miner.
+- `npm start` creates `.venv` and installs missing Python packages automatically on first run.
+- On macOS, non-technical users can run `bash ./setup-mac.command` once and then `bash ./start.command`.
 - Wallet files are saved in `./keys`.
 - Keep private key JSON files offline and never share them.

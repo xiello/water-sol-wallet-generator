@@ -1,0 +1,9 @@
+{
+  "name": "solana-vanity-wallet-generator",
+  "version": "1.0.0",
+  "description": "Interactive wizard for generating Solana vanity wallets",
+  "scripts": {
+    "start": "bash ./forge.sh",
+    "setup:mac": "bash ./setup-mac.command"
+  }
+}

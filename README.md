@@ -9,18 +9,16 @@ Fast Solana vanity wallet generation with OpenCL.
 git clone https://github.com/xiello/water-sol-wallet-generator.git
 cd water-sol-wallet-generator
 
-# 2) Create a virtual environment
-python3 -m venv .venv
-source .venv/bin/activate
-
-# 3) Install dependencies
-python3 -m pip install -r requirements.txt
-
-# 4) Start the interactive wizard
+# 2) Start the interactive wizard
 npm start
 ```
 
-`npm start` launches the guided wizard (`start.py`) that walks you through:
+`npm start` now bootstraps the local Python environment automatically on first run:
+1. Creates `.venv` if missing
+2. Installs required Python packages
+3. Launches the guided wizard (`start.py`)
+
+The wizard walks you through:
 1. Security check (WiFi off)
 2. Prefix/suffix selection
 3. Wallet count
@@ -28,6 +26,21 @@ npm start
 5. Launching the live dashboard miner
 
 Generated wallet JSON files are written to `./keys`.
+
+## macOS Setup
+
+For a Mac where the user is not comfortable with terminal setup:
+
+1. Download or clone the project
+2. Run `setup-mac.command` once
+3. Run `start.command`
+
+Terminal alternative:
+
+```bash
+bash ./setup-mac.command
+npm start
+```
 
 ## Installation
 
